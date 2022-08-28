@@ -5,15 +5,15 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-var player = AudioCache();
+var player = AudioPlayer();
 
-Tabata get defaultTabata => Tabata(
+KendoKeiko get defaultKendoKeiko => KendoKeiko(
       sets: 5,
-      reps: 5,
-      startDelay: Duration(seconds: 10),
-      exerciseTime: Duration(seconds: 20),
+      reps: 1,
+      startDelay: Duration(seconds: 13),
+      keikoTime: Duration(seconds: 150),
       restTime: Duration(seconds: 10),
-      breakTime: Duration(seconds: 60),
+      kotaiTime: Duration(seconds: 13),
     );
 
 class Settings {
@@ -25,9 +25,11 @@ class Settings {
   late String countdownPip;
   late String startRep;
   late String startRest;
-  late String startBreak;
+  late String startKotai;
   late String startSet;
   late String endWorkout;
+  late String hajime;
+  late String yame;
 
   Settings(this._prefs) {
     Map<String, dynamic> json =
@@ -39,9 +41,11 @@ class Settings {
     countdownPip = json['countdownPip'] ?? 'pip.mp3';
     startRep = json['startRep'] ?? 'boop.mp3';
     startRest = json['startRest'] ?? 'dingdingding.mp3';
-    startBreak = json['startBreak'] ?? 'dingdingding.mp3';
+    startKotai = json['startKotai'] ?? 'dingdingding.mp3';
     startSet = json['startSet'] ?? 'boop.mp3';
     endWorkout = json['endWorkout'] ?? 'dingdingding.mp3';
+    hajime = json['hajime'] ?? 'hajime.mp3';
+    yame = json['yame'] ?? 'yame.mp3';
   }
 
   save() {
@@ -55,70 +59,72 @@ class Settings {
         'countdownPip': countdownPip,
         'startRep': startRep,
         'startRest': startRest,
-        'startBreak': startBreak,
+        'startKotai': startKotai,
         'startSet': startSet,
         'endWorkout': endWorkout,
+        'hajime': hajime,
+        'yame': yame,
       };
 }
 
-class Tabata {
+class KendoKeiko {
   /// Sets in a workout
   int sets;
 
   /// Reps in a set
   int reps;
 
-  /// Time to exercise for in each rep
-  Duration exerciseTime;
+  /// Time to practice for in each rep
+  Duration keikoTime;
 
   /// Rest time between reps
   Duration restTime;
 
-  /// Break time between sets
-  Duration breakTime;
+  /// Kotai (Break) time between sets
+  Duration kotaiTime;
 
   /// Initial countdown before starting workout
   Duration startDelay;
 
-  Tabata({
+  KendoKeiko({
     required this.sets,
     required this.reps,
     required this.startDelay,
-    required this.exerciseTime,
+    required this.keikoTime,
     required this.restTime,
-    required this.breakTime,
+    required this.kotaiTime,
   });
 
   Duration getTotalTime() {
-    return (exerciseTime * sets * reps) +
+    return (keikoTime * sets * reps) +
         (restTime * sets * (reps - 1)) +
-        (breakTime * (sets - 1));
+        (kotaiTime * (sets - 1));
   }
 
-  Tabata.fromJson(Map<String, dynamic> json)
+  KendoKeiko.fromJson(Map<String, dynamic> json)
       : sets = json['sets'],
         reps = json['reps'],
-        exerciseTime = Duration(seconds: json['exerciseTime']),
+        keikoTime = Duration(seconds: json['keikoTime']),
         restTime = Duration(seconds: json['restTime']),
-        breakTime = Duration(seconds: json['breakTime']),
+        kotaiTime = Duration(seconds: json['kotaiTime']),
         startDelay = Duration(seconds: json['startDelay']);
 
   Map<String, dynamic> toJson() => {
         'sets': sets,
         'reps': reps,
-        'exerciseTime': exerciseTime.inSeconds,
+        'keikoTime': keikoTime.inSeconds,
         'restTime': restTime.inSeconds,
-        'breakTime': breakTime.inSeconds,
+        'kotaiTime': kotaiTime.inSeconds,
         'startDelay': startDelay.inSeconds,
       };
 }
 
-enum WorkoutState { initial, starting, exercising, resting, breaking, finished }
+enum WorkoutState { initial, starting, practicing, resting, kotai, finished }
 
 class Workout {
   Settings _settings;
 
-  Tabata _config;
+  KendoKeiko _config;
 
   /// Callback for when the workout's state has changed.
   Function _onStateChange;
@@ -184,20 +190,19 @@ class Workout {
 
   /// Moves the workout to the next step and sets up state for it.
   _nextStep() {
-    if (_step == WorkoutState.exercising) {
+    if (_step == WorkoutState.practicing) {
       if (rep == _config.reps) {
         if (set == _config.sets) {
           _finish();
         } else {
-          _startBreak();
+          _startKotai();
         }
       } else {
         _startRest();
       }
     } else if (_step == WorkoutState.resting) {
       _startRep();
-    } else if (_step == WorkoutState.starting ||
-        _step == WorkoutState.breaking) {
+    } else if (_step == WorkoutState.starting || _step == WorkoutState.kotai) {
       _startSet();
     }
   }
@@ -206,7 +211,7 @@ class Workout {
     if (_settings.silentMode) {
       return Future.value();
     }
-    return player.play(sound, mode: PlayerMode.LOW_LATENCY);
+    return player.play(AssetSource(sound));
   }
 
   _startRest() {
@@ -221,27 +226,29 @@ class Workout {
 
   _startRep() {
     _rep++;
-    _step = WorkoutState.exercising;
-    _timeLeft = _config.exerciseTime;
+    _step = WorkoutState.practicing;
+    _timeLeft = _config.keikoTime;
     _playSound(_settings.startRep);
   }
 
-  _startBreak() {
-    _step = WorkoutState.breaking;
-    if (_config.breakTime.inSeconds == 0) {
+  _startKotai() {
+    _step = WorkoutState.kotai;
+    if (_config.kotaiTime.inSeconds == 0) {
       _nextStep();
       return;
     }
-    _timeLeft = _config.breakTime;
-    _playSound(_settings.startBreak);
+    _timeLeft = _config.kotaiTime;
+    // _playSound(_settings.startKotai);
+    _playSound(_settings.yame);
   }
 
   _startSet() {
     _set++;
     _rep = 1;
-    _step = WorkoutState.exercising;
-    _timeLeft = _config.exerciseTime;
-    _playSound(_settings.startSet);
+    _step = WorkoutState.practicing;
+    _timeLeft = _config.keikoTime;
+    // _playSound(_settings.startSet);
+    _playSound(_settings.hajime);
   }
 
   _finish() {

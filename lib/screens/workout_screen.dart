@@ -6,12 +6,12 @@ import '../utils.dart';
 
 String stepName(WorkoutState step) {
   switch (step) {
-    case WorkoutState.exercising:
-      return 'Exercise';
+    case WorkoutState.practicing:
+      return 'Keiko';
     case WorkoutState.resting:
       return 'Rest';
-    case WorkoutState.breaking:
-      return 'Break';
+    case WorkoutState.kotai:
+      return 'Kotai';
     case WorkoutState.finished:
       return 'Finished';
     case WorkoutState.starting:
@@ -23,9 +23,9 @@ String stepName(WorkoutState step) {
 
 class WorkoutScreen extends StatefulWidget {
   final Settings settings;
-  final Tabata tabata;
+  final KendoKeiko kendo_keiko;
 
-  WorkoutScreen({required this.settings, required this.tabata});
+  WorkoutScreen({required this.settings, required this.kendo_keiko});
 
   @override
   State<StatefulWidget> createState() => _WorkoutScreenState();
@@ -37,7 +37,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   @override
   initState() {
     super.initState();
-    _workout = Workout(widget.settings, widget.tabata, _onWorkoutChanged);
+    _workout = Workout(widget.settings, widget.kendo_keiko, _onWorkoutChanged);
     _start();
   }
 
@@ -57,12 +57,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
   _getBackgroundColor(ThemeData theme) {
     switch (_workout.step) {
-      case WorkoutState.exercising:
+      case WorkoutState.practicing:
         return Colors.green;
       case WorkoutState.starting:
       case WorkoutState.resting:
         return Colors.blue;
-      case WorkoutState.breaking:
+      case WorkoutState.kotai:
         return Colors.red;
       default:
         return theme.scaffoldBackgroundColor;
@@ -104,7 +104,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             }, children: [
               TableRow(children: [
                 TableCell(child: Text('Set', style: TextStyle(fontSize: 30.0))),
-                TableCell(child: Text('Rep', style: TextStyle(fontSize: 30.0))),
+                // TableCell(child: Text('Rep', style: TextStyle(fontSize: 30.0))),
                 TableCell(
                     child: Text('Total Time',
                         textAlign: TextAlign.end,
@@ -115,10 +115,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                   child:
                       Text('${_workout.set}', style: TextStyle(fontSize: 60.0)),
                 ),
-                TableCell(
-                  child:
-                      Text('${_workout.rep}', style: TextStyle(fontSize: 60.0)),
-                ),
+                // TableCell(
+                //   child:
+                //       Text('${_workout.rep}', style: TextStyle(fontSize: 60.0)),
+                // ),
                 TableCell(
                     child: Text(
                   formatTime(_workout.totalTime),

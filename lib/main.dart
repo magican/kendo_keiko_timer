@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models.dart';
-import 'screens/tabata_screen.dart';
+import 'screens/kendo_keiko_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,20 +12,21 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
   var prefs = await SharedPreferences.getInstance();
-  runApp(TimerApp(settings: Settings(prefs), prefs: prefs));
+  // await prefs.clear();
+  runApp(KendoTimerApp(settings: Settings(prefs), prefs: prefs));
 }
 
-class TimerApp extends StatefulWidget {
+class KendoTimerApp extends StatefulWidget {
   final Settings settings;
   final SharedPreferences prefs;
 
-  TimerApp({required this.settings, required this.prefs});
+  KendoTimerApp({required this.settings, required this.prefs});
 
   @override
   State<StatefulWidget> createState() => _TimerAppState();
 }
 
-class _TimerAppState extends State<TimerApp> {
+class _TimerAppState extends State<KendoTimerApp> {
   _onSettingsChanged() {
     setState(() {});
     widget.settings.save();
@@ -34,13 +35,13 @@ class _TimerAppState extends State<TimerApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tabata Timer',
+      title: 'Kendo Keiko Timer',
       theme: ThemeData(
         primarySwatch: widget.settings.primarySwatch,
         brightness:
             widget.settings.nightMode ? Brightness.dark : Brightness.light,
       ),
-      home: TabataScreen(
+      home: KendoKeikoScreen(
         settings: widget.settings,
         prefs: widget.prefs,
         onSettingsChanged: _onSettingsChanged,

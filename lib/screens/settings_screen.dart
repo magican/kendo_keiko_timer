@@ -50,7 +50,7 @@ class AudioSelectListItem extends StatelessWidget {
       trailing: IconButton(
         icon: Icon(Icons.play_circle_outline),
         onPressed: () {
-          player.play(value, mode: PlayerMode.LOW_LATENCY);
+          player.play(AssetSource(value));
         },
       ),
       title: Text(title, style: Theme.of(context).textTheme.subtitle2),
@@ -139,33 +139,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
               widget.onSettingsChanged();
             },
           ),
+          // AudioSelectListItem(
+          //   value: widget.settings.startRep,
+          //   title: 'Start next Repetition',
+          //   onChanged: (String? value) {
+          //     widget.settings.startRep = value!;
+          //     widget.onSettingsChanged();
+          //   },
+          // ),
+          // AudioSelectListItem(
+          //   value: widget.settings.startRest,
+          //   title: 'Rest',
+          //   onChanged: (String? value) {
+          //     widget.settings.startRest = value!;
+          //     widget.onSettingsChanged();
+          //   },
+          // ),
           AudioSelectListItem(
-            value: widget.settings.startRep,
-            title: 'Start next rep',
+            value: widget.settings.startKotai,
+            title: 'Kotai (Break)',
             onChanged: (String? value) {
-              widget.settings.startRep = value!;
-              widget.onSettingsChanged();
-            },
-          ),
-          AudioSelectListItem(
-            value: widget.settings.startRest,
-            title: 'Rest',
-            onChanged: (String? value) {
-              widget.settings.startRest = value!;
-              widget.onSettingsChanged();
-            },
-          ),
-          AudioSelectListItem(
-            value: widget.settings.startBreak,
-            title: 'Break',
-            onChanged: (String? value) {
-              widget.settings.startBreak = value!;
+              widget.settings.startKotai = value!;
               widget.onSettingsChanged();
             },
           ),
           AudioSelectListItem(
             value: widget.settings.startSet,
-            title: 'Start next set',
+            title: 'Start next Keiko set',
             onChanged: (String? value) {
               widget.settings.startSet = value!;
               widget.onSettingsChanged();
@@ -173,7 +173,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           AudioSelectListItem(
             value: widget.settings.endWorkout,
-            title: 'End workout (plays twice)',
+            title: 'End Keiko Practice (plays twice)',
             onChanged: (String? value) {
               widget.settings.endWorkout = value!;
               widget.onSettingsChanged();

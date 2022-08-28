@@ -1,5 +1,5 @@
-name: tabata_timer
-description: Tabata training interval timer.
+name: kendo_keiko_timer
+description: Kendo Keiko training interval timer.
 
 # Prevent accidentally publishing to pub.dev using `pub publish`
 publish_to: 'none'
@@ -12,11 +12,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audioplayers: ^0.19.1
-  flutter_colorpicker: ^0.4.0
+  audioplayers: ^1.0.1
+  flutter_colorpicker: ^1.0.3
   numberpicker: ^2.1.1
   shared_preferences: ^2.0.6
-  wakelock: ^0.5.3+3
+  wakelock: ^0.6.2
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +29,6 @@ flutter:
   - assets/boop.mp3
   - assets/dingdingding.mp3
   - assets/pip.mp3
+  - assets/hajime.mp3
+  - assets/yame.mp3
+
