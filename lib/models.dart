@@ -238,8 +238,8 @@ class Workout {
       return;
     }
     _timeLeft = _config.kotaiTime;
-    // _playSound(_settings.startKotai);
-    _playSound(_settings.yame);
+    _playSound(_settings.startKotai);
+    // _playSound(_settings.yame);
   }
 
   _startSet() {
@@ -247,8 +247,8 @@ class Workout {
     _rep = 1;
     _step = WorkoutState.practicing;
     _timeLeft = _config.keikoTime;
-    // _playSound(_settings.startSet);
-    _playSound(_settings.hajime);
+    _playSound(_settings.startSet);
+    // _playSound(_settings.hajime);
   }
 
   _finish() {

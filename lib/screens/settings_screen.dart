@@ -62,6 +62,8 @@ class AudioSelectListItem extends StatelessWidget {
           DropdownMenuItem(child: Text('High Beep'), value: 'boop.mp3'),
           DropdownMenuItem(
               child: Text('Ding Ding Ding!'), value: 'dingdingding.mp3'),
+          DropdownMenuItem(child: Text('Hajime!'), value: 'hajime.mp3'),
+          DropdownMenuItem(child: Text('Yame!'), value: 'yame.mp3'),
         ],
         isExpanded: true,
         onChanged: onChanged,

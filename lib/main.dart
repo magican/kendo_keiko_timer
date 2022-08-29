@@ -12,7 +12,7 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
   var prefs = await SharedPreferences.getInstance();
-  // await prefs.clear();
+  await prefs.clear();
   runApp(KendoTimerApp(settings: Settings(prefs), prefs: prefs));
 }
 
