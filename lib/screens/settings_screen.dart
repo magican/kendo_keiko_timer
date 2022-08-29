@@ -58,12 +58,11 @@ class AudioSelectListItem extends StatelessWidget {
         isDense: true,
         value: value,
         items: [
-          DropdownMenuItem(child: Text('Low Beep'), value: 'pip.mp3'),
-          DropdownMenuItem(child: Text('High Beep'), value: 'boop.mp3'),
-          DropdownMenuItem(
-              child: Text('Ding Ding Ding!'), value: 'dingdingding.mp3'),
-          DropdownMenuItem(child: Text('Hajime!'), value: 'hajime.mp3'),
-          DropdownMenuItem(child: Text('Yame!'), value: 'yame.mp3'),
+          DropdownMenuItem(child: Text('Низкий тон'), value: 'pip.mp3'),
+          DropdownMenuItem(child: Text('Высокий тон'), value: 'boop.mp3'),
+          DropdownMenuItem(child: Text('Динь дон!'), value: 'dingdingding.mp3'),
+          DropdownMenuItem(child: Text('Хаджимэ!'), value: 'hajime.mp3'),
+          DropdownMenuItem(child: Text('Ямэ!'), value: 'yame.mp3'),
         ],
         isExpanded: true,
         onChanged: onChanged,
@@ -76,18 +75,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text('Настройки'),
       ),
       body: ListView(
         children: <Widget>[
           ListTile(
             title: Text(
-              'Theme',
+              'Тема',
               style: Theme.of(context).textTheme.subtitle2,
             ),
           ),
           SwitchListTile(
-            title: Text('Night mode'),
+            title: Text('Тёмная тема'),
             value: widget.settings.nightMode,
             onChanged: (nightMode) {
               widget.settings.nightMode = nightMode;
@@ -95,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           SwitchListTile(
-            title: Text('Silent mode'),
+            title: Text('Беззвучный режим'),
             value: widget.settings.silentMode,
             onChanged: (silentMode) {
               widget.settings.silentMode = silentMode;
@@ -103,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           ListTile(
-            title: Text('Light theme'),
+            title: Text('Светлая тема'),
             subtitle: Text(colorNames[widget.settings.primarySwatch] ?? ''),
             onTap: () {
               showDialog(
@@ -129,13 +128,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Divider(height: 10),
           ListTile(
             title: Text(
-              'Sounds',
+              'Звуки',
               style: Theme.of(context).textTheme.subtitle2,
             ),
           ),
           AudioSelectListItem(
             value: widget.settings.countdownPip,
-            title: 'Countdown pips',
+            title: 'Обратный отсчёт',
             onChanged: (String? value) {
               widget.settings.countdownPip = value!;
               widget.onSettingsChanged();
@@ -159,7 +158,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // ),
           AudioSelectListItem(
             value: widget.settings.startKotai,
-            title: 'Kotai (Break)',
+            title: 'Котай (переход)',
             onChanged: (String? value) {
               widget.settings.startKotai = value!;
               widget.onSettingsChanged();
@@ -167,7 +166,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           AudioSelectListItem(
             value: widget.settings.startSet,
-            title: 'Start next Keiko set',
+            title: 'Старт кейко',
             onChanged: (String? value) {
               widget.settings.startSet = value!;
               widget.onSettingsChanged();
@@ -175,7 +174,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           AudioSelectListItem(
             value: widget.settings.endWorkout,
-            title: 'End Keiko Practice (plays twice)',
+            title: 'Окончание тренировки (играет дважды)',
             onChanged: (String? value) {
               widget.settings.endWorkout = value!;
               widget.onSettingsChanged();

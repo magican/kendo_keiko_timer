@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 var player = AudioPlayer();
 
 KendoKeiko get defaultKendoKeiko => KendoKeiko(
-      sets: 5,
+      sets: 10,
       reps: 1,
       startDelay: Duration(seconds: 13),
       keikoTime: Duration(seconds: 150),

@@ -15,7 +15,7 @@ class DurationPickerDialog extends StatefulWidget {
     Widget? confirmWidget,
     Widget? cancelWidget,
   })  : confirmWidget = confirmWidget ?? Text('OK'),
-        cancelWidget = cancelWidget ?? Text('CANCEL');
+        cancelWidget = cancelWidget ?? Text('ОТМЕНА');
 
   @override
   State<StatefulWidget> createState() =>

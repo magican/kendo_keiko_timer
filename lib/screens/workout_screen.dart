@@ -7,15 +7,15 @@ import '../utils.dart';
 String stepName(WorkoutState step) {
   switch (step) {
     case WorkoutState.practicing:
-      return 'Keiko';
+      return 'Кейко!';
     case WorkoutState.resting:
-      return 'Rest';
+      return 'Отдых';
     case WorkoutState.kotai:
-      return 'Kotai';
+      return 'Котай';
     case WorkoutState.finished:
-      return 'Finished';
+      return 'Законили';
     case WorkoutState.starting:
-      return 'Starting';
+      return 'Начинаем';
     default:
       return '';
   }
@@ -103,12 +103,27 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               2: FlexColumnWidth(1.0)
             }, children: [
               TableRow(children: [
-                TableCell(child: Text('Set', style: TextStyle(fontSize: 30.0))),
+                TableCell(
+                    child: Text('Кейко №', style: TextStyle(fontSize: 30.0))),
                 // TableCell(child: Text('Rep', style: TextStyle(fontSize: 30.0))),
                 TableCell(
-                    child: Text('Total Time',
-                        textAlign: TextAlign.end,
-                        style: TextStyle(fontSize: 30.0)))
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                      Text(
+                        'Всего',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 30.0),
+                      ), // <-- Text
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        Icons.timer,
+                        size: 30.0,
+                      ),
+                    ]))
               ]),
               TableRow(children: [
                 TableCell(
