@@ -41,8 +41,10 @@ class Settings {
     countdownPip = json['countdownPip'] ?? 'pip.mp3';
     startRep = json['startRep'] ?? 'boop.mp3';
     startRest = json['startRest'] ?? 'dingdingding.mp3';
-    startKotai = json['startKotai'] ?? 'dingdingding.mp3';
-    startSet = json['startSet'] ?? 'boop.mp3';
+    // startKotai = json['startKotai'] ?? 'dingdingding.mp3';
+    startKotai = json['startKotai'] ?? 'yame.mp3';
+    // startSet = json['startSet'] ?? 'boop.mp3';
+    startSet = json['startSet'] ?? 'hajime.mp3';
     endWorkout = json['endWorkout'] ?? 'dingdingding.mp3';
     hajime = json['hajime'] ?? 'hajime.mp3';
     yame = json['yame'] ?? 'yame.mp3';

@@ -17,10 +17,26 @@ dependencies:
   numberpicker: ^2.1.1
   shared_preferences: ^2.0.6
   wakelock: ^0.6.2
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/icons/kendo_keiko_timer.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: false
+    image_path: "assets/icons/kendo_keiko_timer.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  windows:
+    generate: false
+    image_path: "assets/icons/kendo_keiko_timer.png"
+    icon_size: 48 # min:48, max:256, default: 48
 
 flutter:
   uses-material-design: true
@@ -31,4 +47,5 @@ flutter:
   - assets/pip.mp3
   - assets/hajime.mp3
   - assets/yame.mp3
+  - assets/icons/kendo_keiko_timer.png
 

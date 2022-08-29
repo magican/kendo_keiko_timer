@@ -50,7 +50,16 @@ class _KendoKeikoScreenState extends State<KendoKeikoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Kendo Keiko Timer'),
-        leading: Icon(Icons.timer),
+        leading: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: 44,
+            minHeight: 44,
+            maxWidth: 64,
+            maxHeight: 64,
+          ),
+          child: Image.asset("assets/icons/kendo_keiko_timer.png",
+              fit: BoxFit.cover),
+        ),
         actions: <Widget>[
           Builder(
             builder: (context) => IconButton(
