@@ -286,7 +286,7 @@ class _KendoKeikoScreenState extends State<KendoKeikoScreen> {
         },
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Theme.of(context).primaryTextTheme.button?.color,
-        tooltip: 'Let the Keiko begins!',
+        tooltip: 'Да начнётся Кейко!',
         child: Icon(Icons.play_arrow),
       ),
     );

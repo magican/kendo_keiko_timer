@@ -11,9 +11,9 @@ KendoKeiko get defaultKendoKeiko => KendoKeiko(
       sets: 10,
       reps: 1,
       startDelay: Duration(seconds: 13),
-      keikoTime: Duration(seconds: 150),
+      keikoTime: Duration(seconds: 180),
       restTime: Duration(seconds: 10),
-      kotaiTime: Duration(seconds: 13),
+      kotaiTime: Duration(seconds: 23),
     );
 
 class Settings {
@@ -41,8 +41,8 @@ class Settings {
     countdownPip = json['countdownPip'] ?? 'pip.mp3';
     startRep = json['startRep'] ?? 'boop.mp3';
     startRest = json['startRest'] ?? 'dingdingding.mp3';
-    // startKotai = json['startKotai'] ?? 'dingdingding.mp3';
-    startKotai = json['startKotai'] ?? 'yame.mp3';
+    startKotai = json['startKotai'] ?? 'dingdingding.mp3';
+    // startKotai = json['startKotai'] ?? 'yame.mp3';
     // startSet = json['startSet'] ?? 'boop.mp3';
     startSet = json['startSet'] ?? 'hajime.mp3';
     endWorkout = json['endWorkout'] ?? 'dingdingding.mp3';
